@@ -12,7 +12,12 @@ function App() {
       <Switch>
         <Route exact path="/"><MovieList /></Route>
         <Route path="/movies/new"><NewMovie /></Route>
-        <Route path="/movies/:id/edit"><EditMovie /></Route>
+        <Route
+          path="/movies/:id/edit"
+          render={
+            (reactRouterProps) => (<EditMovie { ...reactRouterProps } />)
+          }
+        />
         <Route
           path="/movies/:id"
           render={
