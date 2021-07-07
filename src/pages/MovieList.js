@@ -8,22 +8,27 @@ class MovieList extends Component {
   constructor() {
     super();
 
+    this.updateMoviesState = this.updateMoviesState.bind(this);
+
     this.state = {
       movies: [],
       loading: true,
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { getMovies } = movieAPI;
-    const moviesList = getMovies();
-    moviesList.then((movie) => {
-      this.setState((state) => ({
-        ...state,
-        movies: movie,
-        loading: false,
-      }));
-    });
+    const { updateMoviesState } = this;
+    const moviesList = await getMovies();
+    updateMoviesState(moviesList);
+  }
+
+  updateMoviesState(movies) {
+    this.setState((state) => ({
+      ...state,
+      movies,
+      loading: false,
+    }));
   }
 
   render() {
