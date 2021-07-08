@@ -5,8 +5,8 @@ import * as movieAPI from '../services/movieAPI';
 import { Loading } from '../components';
 
 class MovieDetails extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.updateMovieState = this.updateMovieState.bind(this);
 
@@ -40,6 +40,8 @@ class MovieDetails extends Component {
 
     const { match: { params: { id } } } = this.props;
 
+    const { deleteMovie } = movieAPI;
+
     return (
       loading
         ? <Loading />
@@ -53,6 +55,7 @@ class MovieDetails extends Component {
             <p>{ `Rating: ${rating}` }</p>
             <Link to={ `/movies/${id}/edit` }>EDITAR</Link>
             <Link to="/">VOLTAR</Link>
+            <Link to="/" onClick={ () => deleteMovie(id) }>DELETAR</Link>
           </div>
         )
     );

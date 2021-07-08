@@ -48,6 +48,7 @@ class EditMovie extends Component {
 
   render() {
     const { loading, shouldRedirect, movie } = this.state;
+
     return (
       loading
         ? <Loading />
